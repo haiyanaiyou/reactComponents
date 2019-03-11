@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>hello react</title>
+		<script src="build/react.development.js"></script>
+	    <script src="build/react-dom.development.js"></script>
+	    <script src="build/babel.min.js"></script>
+	    <style type="text/css">
+	    	#demo{
+	    		padding: 50px;
+	    		background: #eee;
+	    	}
+	    	#demo h1{
+	    		color: blueviolet;
+	    		font-size: 144px;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<div id="demo"></div>
+		<script type="text/babel">
+			ReactDOM.render(
+				<h1>I am Tyler</h1>,
+				document.getElementById('demo')
+			)
+		</script>
+	</body>
+</html>
