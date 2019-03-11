@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件的样式设计</title>
+		<script src="build/babel.min.js"></script>
+		<script src="build/react.development.js"></script>
+		<script src="build/react-dom.development.js"></script>
+		<script src="build/react.js"></script>
+		<style type="text/css">
+			#container{
+				padding: 50px;
+			}
+			/*.letter{
+				display: inline-block;
+				background: antiquewhite;
+				font-size: 18px;
+				padding: 10px;
+				margin-right: 20px;
+			}*/
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/babel">
+//			var Letter = React.createClass({
+//				render: function(){
+//					return (
+//						<div className="letter">
+//							{this.props.children}
+//						</div>
+//					)
+//				}
+//			})
+			var Letter = React.createClass({
+				render: function(){
+					var letterStyle = {
+						padding:10,
+						backgroundColor:this.props.bgColor,
+						display:"inline-block",
+						marginRight: 20,
+						fontSize: 18
+					}
+					return (
+					
+						<div style={letterStyle}>
+							{this.props.children}
+						</div>
+						
+					)
+				}
+				
+			})
+			ReactDOM.render(
+				<div>
+					<Letter bgColor="#ff5566">T</Letter>
+					<Letter bgColor="#333">W</Letter>
+					<Letter bgColor="#884">E</Letter>
+					<Letter bgColor="#555">R</Letter>
+					<Letter bgColor="#666">Y</Letter>
+					<Letter bgColor="#777">U</Letter>
+				</div>
+				,
+				document.querySelector('#container')
+			)
+		</script>
+	</body>
+</html>
