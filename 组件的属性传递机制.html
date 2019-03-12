@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="build/babel.min.js"></script>
+		<script src="build/react.development.js"></script>
+		<script src="build/react-dom.development.js"></script>
+		<script src="build/react.js"></script>
+		<title>组件的属性传递机制</title>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/babel">
+			var destination = document.querySelector('#container');
+			var Display = React.createClass({
+				render: function(){
+					return(
+						<div>
+							<p>{this.props.color}</p>
+							<p>{this.props.num}</p>
+							<p>{this.props.size}</p>
+						</div>
+					)
+				}
+			});
+			var Label = React.createClass({
+				render: function(){
+					return (
+						<div>
+							<Display {...this.props}/>
+						</div>
+					)
+				}
+			});
+			var Shirt = React.createClass({
+				render: function(){
+					return (
+						<Label {...this.props} />
+					)
+				}
+			});
+			ReactDOM.render(
+				<Shirt color="deepblue" num="13" size='middle'/>
+				,
+				destination
+			)
+		</script>
+	</body>
+</html>
