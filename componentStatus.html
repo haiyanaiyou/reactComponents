@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组建的状态机制</title>
+		<script src="build/babel.min.js"></script>
+		<script src="build/react.development.js"></script>
+		<script src="build/react-dom.development.js"></script>
+		<script src="build/react.js"></script>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/babel">
+			var destination = document.querySelector('#container');
+			var LightningCounter = React.createClass({
+				//组件被加载之前调用使用 初始化阶段
+				getInitialState:function(){
+					return {
+						strikes:0
+					};
+				},
+				timerTrick:function(){
+					this.setState({
+						strikes: this.state.strikes + 100
+					})
+				},
+				//组件加载完之后render没有被调用之前调用
+				componentDidMount: function(){
+					setInterval(this.timerTrick,1000)
+				},
+				//修改组件本身state对象
+//				setState:function(){},
+				render: function(){
+					var counterStyle = {
+						color: '#666fff',
+						fontSize: 36
+					}
+					var count = this.state.strikes.toLocaleString()
+					return (
+						<div>
+							<h1 style={counterStyle}>{count}</h1>
+						</div>
+					)
+				}
+			});
+			var LightningCounterDisplay = React.createClass({
+				render: function(){
+					var commonStyle = {
+						padding:0,
+						margin:0
+					}
+					var displayStyle = {
+						width: 250,
+						textAlign: 'center',
+						backgroundColor: 'black',
+						color: '#fff',
+						padding:14,
+						fontFamily:'sans-serif',
+						borderRadius: 12
+					}
+					var textStyle = {
+						empasis:{
+							fontSize:18,
+							...commonStyle
+						},
+						smallEmpasis:{
+							fontSize:22,
+							...commonStyle
+						},
+						small:{
+							fontSize:14,
+							opacity:0.5,
+							...commonStyle
+						}
+					}
+					return (
+						<div style={displayStyle}>
+							<LightningCounter />
+							<h2 style={textStyle.smallEmpasis}>雷霆打击</h2>
+							<h2 style={textStyle.empasis}>我们的地球</h2>
+							<p style={textStyle.small}>(自从你加载这个组件之后)</p>
+						</div>
+						
+					)
+				}
+			})
+			ReactDOM.render(
+				<div>
+					<LightningCounterDisplay />
+				</div>,
+				destination
+			)
+		</script>
+	</body>
+</html>
