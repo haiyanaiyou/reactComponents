@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="build/babel.min.js"></script>
+	<script src="build/react.development.js"></script>
+	<script src="build/react-dom.development.js"></script>
+	<script src="build/react.js"></script>
+    <title>react 生命周期</title>
+    <style>
+        #container{
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var destination = document.querySelector('#container');
+        var Counter = React.createClass({
+            render: function(){
+                var textStyle={
+                    fontSize: 30,
+                    textAlign: 'center',
+                    fontBold: 700
+                }
+                return (
+                    <div style={textStyle}>
+                        {this.props.display}
+                    </div>
+                )
+            }
+        })
+        var CounterParent = React.createClass({
+            getDefaultProps: function(){
+                console.log('getDefaultProps')
+                return {}
+            },
+            getInitialState: function(){
+                console.log('getInitialState')
+                return {
+                    count: 0
+                }
+            },
+            componentWillMount:function(){
+                console.log('componentWillComponent')
+                return
+            },
+            componentDidMount:function(){
+                console.log('componentDidMount')
+                return
+            },
+            increase: function(){
+                this.setState({
+                    count: this.state.count +1
+                })
+            },
+            shouldComponentUpdate: function(newProps,newState){
+                console.log('shouldComponentUpdate')
+                if(newState.count <5){
+                    return true
+                }else{
+                    return false
+                }
+
+            },
+            componentWillUpdate: function(){
+                console.log('componentWillUpdate')
+                return
+            },
+            componentDidUpdate: function(){
+                console.log('componentDidUpdate')
+                return
+            },
+            render: function(){
+                var backgroundStyle = {
+                    border: '2px dotted #333',
+                    width:200,
+                    height:260,
+                    padding:30,
+                    textAlign:'center'
+                }
+                console.log('render....')
+                return(
+                    <div style={backgroundStyle}>
+                        <Counter display={this.state.count}/>
+                        <button onClick={this.increase}>+</button>
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(
+            <div>
+               <CounterParent />
+            </div>,
+            destination
+        )
+    </script>
+</body>
+</html>
