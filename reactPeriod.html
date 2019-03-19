@@ -60,9 +60,14 @@
                 if(newState.count <5){
                     return true
                 }else{
+                	ReactDOM.unmountComponentAtNode(destination);
                     return false
                 }
 
+            },
+            componentWillUnmount:function(){
+            	console.log('componentWillUnmount');
+            	return
             },
             componentWillUpdate: function(){
                 console.log('componentWillUpdate')
